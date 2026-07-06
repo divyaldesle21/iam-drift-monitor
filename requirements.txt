@@ -1,7 +1,5 @@
-@"
-checkov==3.2.0
+checkov
 boto3
 pyyaml
 gitpython
 pytest
-"@ | Set-Content requirements.txt
