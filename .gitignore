@@ -1,0 +1,10 @@
+@"
+*.tfstate
+*.tfstate.backup
+.terraform/
+__pycache__/
+*.pyc
+.env
+plan.bin
+plan.json
+"@ | Set-Content .gitignore

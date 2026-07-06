@@ -1,0 +1,7 @@
+@"
+.git
+*.tfstate
+.terraform/
+__pycache__/
+.env
+"@ | Set-Content .dockerignore
