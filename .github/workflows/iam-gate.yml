@@ -1,0 +1,69 @@
+name: IAM Drift Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+
+jobs:
+  iam-scan:
+    name: IAM Privilege Drift Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: Terraform init
+        working-directory: infra
+        run: terraform init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Terraform plan
+        working-directory: infra
+        run: |
+          terraform plan -out=plan.bin
+          terraform show -json plan.bin > ../plan.json
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Build scanner image
+        run: docker build -t iam-drift-monitor .
+
+      - name: Run Checkov baseline scan
+        run: |
+          docker run --rm \
+            --entrypoint checkov \
+            -v ${{ github.workspace }}:/app \
+            iam-drift-monitor \
+            -d /app/infra \
+            --framework terraform \
+            --soft-fail
+
+      - name: Run custom IAM drift scan
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            iam-drift-monitor \
+            /app/plan.json
+
+      - name: Notify Discord on failure
+        if: failure()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "content": "🚨 **IAM Drift Detected** — build blocked on `${{ github.repository }}` by `${{ github.actor }}`\nBranch: `${{ github.head_ref }}`\nSee: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }'
