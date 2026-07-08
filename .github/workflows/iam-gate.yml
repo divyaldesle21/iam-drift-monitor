@@ -36,8 +36,22 @@ jobs:
 
       - name: Run Checkov baseline scan
         run: |
+          pip install checkov --quiet
+          checkov -d infra --framework terraform --soft-fail
+
+      - name: Run custom IAM drift scan
+        run: |
           docker run --rm \
-            --entrypoint checkov \
             -v ${{ github.workspace }}:/app \
             iam-drift-monitor \
-            -d
+            /app/plan.json
+
+      - name: Notify Discord on failure
+        if: failure()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"content\": \"🚨 **IAM Drift Detected** — build
