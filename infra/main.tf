@@ -37,3 +37,18 @@ resource "aws_iam_role_policy" "bad_policy" {
     ]
   })
 }
+
+resource "aws_iam_role_policy" "extra_bad_policy" {
+  name = "extra-overprivileged"
+  role = aws_iam_role.ci_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = ["*"]
+        Resource = "*"
+      }
+    ]
+  })
+}
