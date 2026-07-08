@@ -39,7 +39,7 @@ jobs:
           pip install checkov --quiet
           checkov -d infra --framework terraform --soft-fail
 
-      - name: Run custom IAM drift scan
+- name: Run custom IAM drift scan
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/app \
@@ -51,7 +51,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
+          MESSAGE="IAM Drift Detected - build blocked on ${{ github.repository }} by ${{ github.actor }} - Branch: ${{ github.head_ref }} - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           curl -s -X POST "$DISCORD_WEBHOOK" \
             -H "Content-Type: application/json" \
-            -d "{
-              \"content\": \"🚨 **IAM Drift Detected** — build
+            -d "{\"content\": \"$MESSAGE\"}"
