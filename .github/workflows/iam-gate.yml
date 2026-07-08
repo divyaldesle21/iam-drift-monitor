@@ -21,25 +21,16 @@ jobs:
 
       - name: Generate mock plan
         run: |
-          echo '{
-            "resource_changes": [{
-              "address": "aws_iam_role_policy.bad_policy",
-              "type": "aws_iam_role_policy",
-              "change": {
-                "actions": ["create"],
-                "after": {
-                  "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:PassRole\",\"s3:DeleteBucket\",\"ec2:*\"],\"Resource\":\"*\"}]}"
-                }
-              }
-            }]
-          }' > plan.json
+          cat > plan.json << 'EOF'
+          {"resource_changes":[{"address":"aws_iam_role_policy.bad_policy","type":"aws_iam_role_policy","change":{"actions":["create"],"after":{"policy":"{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:PassRole\",\"s3:DeleteBucket\",\"ec2:*\"],\"Resource\":\"*\"}]}"}}}]}
+          EOF
 
       - name: Run Checkov baseline scan
         run: |
           pip install checkov --quiet
           checkov -d infra --framework terraform --soft-fail
 
-- name: Run custom IAM drift scan
+      - name: Run custom IAM drift scan
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/app \
@@ -51,7 +42,6 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
-          MESSAGE="IAM Drift Detected - build blocked on ${{ github.repository }} by ${{ github.actor }} - Branch: ${{ github.head_ref }} - Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -s -X POST "$DISCORD_WEBHOOK" \
+          curl -s -X POST "${DISCORD_WEBHOOK}" \
             -H "Content-Type: application/json" \
-            -d "{\"content\": \"$MESSAGE\"}"
+            --data-raw '{"content":"IAM Drift Detected - build blocked on ${{ github.repository }} by ${{ github.actor }}"}'
