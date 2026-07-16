@@ -52,10 +52,4 @@ resource "aws_iam_role_policy" "extra_bad_policy" {
     ]
   })
 }
-<<<<<<< HEAD
-# final demo trigger
-=======
 # sarif on main trigger
-# sarif on main trigger
-# sarif on main trigger
->>>>>>> main
