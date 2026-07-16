@@ -129,6 +129,15 @@ def main():
             blocked = True
     except Exception as e:
         print(f"Graph analysis skipped: {e}")
+# ML anomaly scoring
+    try:
+        from ml_scorer import analyze_ml, print_ml_report
+        ml_results = analyze_ml(plan_path)
+        ml_blocked = print_ml_report(ml_results)
+        if ml_blocked:
+            blocked = True
+    except Exception as e:
+        print(f"ML analysis skipped: {e}")
 
     if blocked:
         print("BUILD BLOCKED — HIGH severity findings detected.")
