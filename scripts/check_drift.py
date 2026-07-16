@@ -120,6 +120,15 @@ def main():
         print(f"   → {f['reason']}\n")
         if f["severity"] == "HIGH":
             blocked = True
+# Graph-based attack path analysis
+    try:
+        from graph_engine import analyze_graph, print_graph_report
+        _, graph_stats = analyze_graph(plan_path)
+        graph_blocked = print_graph_report(graph_stats)
+        if graph_blocked:
+            blocked = True
+    except Exception as e:
+        print(f"Graph analysis skipped: {e}")
 
     if blocked:
         print("BUILD BLOCKED — HIGH severity findings detected.")

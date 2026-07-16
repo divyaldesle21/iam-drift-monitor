@@ -3,3 +3,4 @@ boto3
 pyyaml
 gitpython
 pytest
+"checkov`nboto3`npyyaml`ngitpython`npytest`nnetworkx`nscikit-learn`nnumpy" | Out-File -FilePath requirements.txt -Encoding utf8NoBOM
