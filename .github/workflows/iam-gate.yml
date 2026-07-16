@@ -45,3 +45,18 @@ jobs:
           curl -s -X POST "${DISCORD_WEBHOOK}" \
             -H "Content-Type: application/json" \
             --data-raw '{"content":"IAM Drift Detected - build blocked on ${{ github.repository }} by ${{ github.actor }}"}'
+      - name: Generate SARIF report
+        if: always()
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            --entrypoint python \
+            iam-drift-monitor \
+            /app/scripts/sarif_reporter.py /app/plan.json /app/results.sarif
+
+      - name: Upload SARIF to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
+          category: iam-drift-monitor
