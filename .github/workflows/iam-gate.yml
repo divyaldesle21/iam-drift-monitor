@@ -6,7 +6,12 @@ on:
       - main
     paths:
       - 'infra/**'
-
+  push:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+      
 jobs:
   iam-scan:
     name: IAM Privilege Drift Scan

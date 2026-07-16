@@ -1,0 +1,561 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "IAM-Drift-Monitor",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/divyaldesle21/iam-drift-monitor",
+          "rules": [
+            {
+              "id": "IAM001",
+              "name": "iam:PassRole with wildcard Resource \u2014 privilege escalation risk",
+              "shortDescription": {
+                "text": "iam:PassRole with wildcard Resource \u2014 privilege escalation risk"
+              },
+              "fullDescription": {
+                "text": "iam:PassRole with wildcard Resource \u2014 privilege escalation risk"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "aws"
+                ]
+              }
+            },
+            {
+              "id": "IAM002",
+              "name": "Dangerous action 's3:DeleteBucket' with wildcard Resource",
+              "shortDescription": {
+                "text": "Dangerous action 's3:DeleteBucket' with wildcard Resource"
+              },
+              "fullDescription": {
+                "text": "Dangerous action 's3:DeleteBucket' with wildcard Resource"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "aws"
+                ]
+              }
+            },
+            {
+              "id": "IAM003",
+              "name": "Dangerous action 'ec2:*' with wildcard Resource",
+              "shortDescription": {
+                "text": "Dangerous action 'ec2:*' with wildcard Resource"
+              },
+              "fullDescription": {
+                "text": "Dangerous action 'ec2:*' with wildcard Resource"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "aws"
+                ]
+              }
+            },
+            {
+              "id": "IAM004",
+              "name": "Dangerous action 'iam:AttachRolePolicy' with wildcard Resource",
+              "shortDescription": {
+                "text": "Dangerous action 'iam:AttachRolePolicy' with wildcard Resource"
+              },
+              "fullDescription": {
+                "text": "Dangerous action 'iam:AttachRolePolicy' with wildcard Resource"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "aws"
+                ]
+              }
+            },
+            {
+              "id": "IAM005",
+              "name": "Dangerous action 'iam:CreatePolicyVersion' with wildcard Resource",
+              "shortDescription": {
+                "text": "Dangerous action 'iam:CreatePolicyVersion' with wildcard Resource"
+              },
+              "fullDescription": {
+                "text": "Dangerous action 'iam:CreatePolicyVersion' with wildcard Resource"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "aws"
+                ]
+              }
+            },
+            {
+              "id": "IAM006",
+              "name": "Overly broad EC2 permission 'ec2:*'",
+              "shortDescription": {
+                "text": "Overly broad EC2 permission 'ec2:*'"
+              },
+              "fullDescription": {
+                "text": "Overly broad EC2 permission 'ec2:*' \u2014 MITRE ATT&CK: T1578"
+              },
+              "help": {
+                "text": "Replace with specific EC2 actions required",
+                "markdown": "**Remediation:** Replace with specific EC2 actions required"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "opa",
+                  "mitre:T1578"
+                ]
+              }
+            },
+            {
+              "id": "GRAPH001",
+              "name": "Privilege Escalation Attack Path",
+              "shortDescription": {
+                "text": "Multi-hop privilege escalation path detected"
+              },
+              "fullDescription": {
+                "text": "Graph analysis identified a privilege escalation chain across multiple IAM permissions \u2014 MITRE ATT&CK: T1548"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "iam",
+                  "graph",
+                  "mitre:T1548"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "IAM001",
+          "level": "error",
+          "message": {
+            "text": "iam:PassRole with wildcard Resource \u2014 privilege escalation risk on resource: aws_iam_role_policy.bad_policy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "resource": "aws_iam_role_policy.bad_policy"
+          }
+        },
+        {
+          "ruleId": "IAM002",
+          "level": "error",
+          "message": {
+            "text": "Dangerous action 's3:DeleteBucket' with wildcard Resource on resource: aws_iam_role_policy.bad_policy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "resource": "aws_iam_role_policy.bad_policy"
+          }
+        },
+        {
+          "ruleId": "IAM003",
+          "level": "error",
+          "message": {
+            "text": "Dangerous action 'ec2:*' with wildcard Resource on resource: aws_iam_role_policy.bad_policy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "resource": "aws_iam_role_policy.bad_policy"
+          }
+        },
+        {
+          "ruleId": "IAM004",
+          "level": "error",
+          "message": {
+            "text": "Dangerous action 'iam:AttachRolePolicy' with wildcard Resource on resource: aws_iam_role_policy.escalation_policy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "resource": "aws_iam_role_policy.escalation_policy"
+          }
+        },
+        {
+          "ruleId": "IAM005",
+          "level": "error",
+          "message": {
+            "text": "Dangerous action 'iam:CreatePolicyVersion' with wildcard Resource on resource: aws_iam_role_policy.escalation_policy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "resource": "aws_iam_role_policy.escalation_policy"
+          }
+        },
+        {
+          "ruleId": "IAM006",
+          "level": "warning",
+          "message": {
+            "text": "Overly broad EC2 permission 'ec2:*' \u2014 Remediation: Replace with specific EC2 actions required"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "MEDIUM",
+            "mitre": "T1578",
+            "resource": "aws_iam_role_policy.bad_policy"
+          }
+        },
+        {
+          "ruleId": "IAM002",
+          "level": "error",
+          "message": {
+            "text": "iam:PassRole with wildcard resource enables privilege escalation \u2014 Remediation: Scope Resource to specific role ARNs only"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "CRITICAL",
+            "mitre": "T1548",
+            "resource": "aws_iam_role_policy.bad_policy"
+          }
+        },
+        {
+          "ruleId": "IAM003",
+          "level": "error",
+          "message": {
+            "text": "Destructive S3 action 's3:DeleteBucket' with wildcard resource \u2014 Remediation: Scope to specific bucket ARN and remove destructive permissions"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "mitre": "T1485",
+            "resource": "aws_iam_role_policy.bad_policy"
+          }
+        },
+        {
+          "ruleId": "IAM004",
+          "level": "error",
+          "message": {
+            "text": "IAM escalation action 'iam:AttachRolePolicy' with wildcard resource \u2014 Remediation: Scope to specific IAM role/user ARNs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "mitre": "T1548",
+            "resource": "aws_iam_role_policy.escalation_policy"
+          }
+        },
+        {
+          "ruleId": "IAM004",
+          "level": "error",
+          "message": {
+            "text": "IAM escalation action 'iam:CreatePolicyVersion' with wildcard resource \u2014 Remediation: Scope to specific IAM role/user ARNs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "mitre": "T1548",
+            "resource": "aws_iam_role_policy.escalation_policy"
+          }
+        },
+        {
+          "ruleId": "IAM004",
+          "level": "error",
+          "message": {
+            "text": "IAM escalation action 'iam:SetDefaultPolicyVersion' with wildcard resource \u2014 Remediation: Scope to specific IAM role/user ARNs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "mitre": "T1548",
+            "resource": "aws_iam_role_policy.escalation_policy"
+          }
+        },
+        {
+          "ruleId": "GRAPH001",
+          "level": "error",
+          "message": {
+            "text": "Escalation path: iam:CreateRole \u2192 iam:AttachRolePolicy"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "path_length": 2
+          }
+        },
+        {
+          "ruleId": "GRAPH001",
+          "level": "error",
+          "message": {
+            "text": "Escalation path: iam:CreatePolicyVersion \u2192 iam:SetDefaultPolicyVersion"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "path_length": 2
+          }
+        },
+        {
+          "ruleId": "GRAPH001",
+          "level": "error",
+          "message": {
+            "text": "Escalation path: lambda:CreateFunction \u2192 iam:PassRole"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "path_length": 2
+          }
+        },
+        {
+          "ruleId": "GRAPH001",
+          "level": "error",
+          "message": {
+            "text": "Escalation path: lambda:InvokeFunction \u2192 lambda:CreateFunction \u2192 iam:PassRole"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "CRITICAL",
+            "path_length": 3
+          }
+        },
+        {
+          "ruleId": "GRAPH001",
+          "level": "error",
+          "message": {
+            "text": "Escalation path: lambda:InvokeFunction \u2192 lambda:CreateFunction"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "infra/main.tf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "HIGH",
+            "path_length": 2
+          }
+        }
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "startTimeUtc": "2026-07-16T01:13:33.245476Z"
+        }
+      ]
+    }
+  ]
+}
