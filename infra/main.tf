@@ -52,3 +52,4 @@ resource "aws_iam_role_policy" "extra_bad_policy" {
     ]
   })
 }
+# final demo trigger
