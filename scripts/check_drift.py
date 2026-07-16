@@ -129,6 +129,17 @@ def main():
             blocked = True
     except Exception as e:
         print(f"Graph analysis skipped: {e}")
+
+# OPA/Rego policy engine
+    try:
+        from opa_runner import analyze_opa, print_opa_report
+        opa_violations = analyze_opa(plan_path)
+        opa_blocked = print_opa_report(opa_violations)
+        if opa_blocked:
+            blocked = True
+    except Exception as e:
+        print(f"OPA analysis skipped: {e}")
+
 # ML anomaly scoring
     try:
         from ml_scorer import analyze_ml, print_ml_report
