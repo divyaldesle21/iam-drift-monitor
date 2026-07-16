@@ -8,9 +8,16 @@ DANGEROUS_ACTIONS = [
     "iam:AttachRolePolicy",
     "iam:PutRolePolicy",
     "s3:DeleteBucket",
+    "s3:DeleteObject",           # was missing
+    "s3:DeleteBucketPolicy",     # was missing
     "ec2:*",
     "lambda:*",
     "sts:AssumeRole",
+    "dynamodb:DeleteTable",      # was missing
+    "cloudtrail:StopLogging",    # was missing
+    "cloudtrail:DeleteTrail",    # was missing
+    "kms:Decrypt",               # was missing
+    "secretsmanager:GetSecretValue",  # was missing
 ]
 
 def parse_policy(policy_str):
