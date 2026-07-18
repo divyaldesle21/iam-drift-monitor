@@ -1,0 +1,14 @@
+{
+  "resource_changes": [
+    {
+      "address": "aws_iam_user_policy.userpolicy",
+      "type": "aws_iam_user_policy",
+      "change": {
+        "actions": ["create"],
+        "after": {
+          "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"ec2:*\",\"s3:*\",\"lambda:*\",\"cloudwatch:*\"],\"Resource\":\"*\"}]}"
+        }
+      }
+    }
+  ]
+}
