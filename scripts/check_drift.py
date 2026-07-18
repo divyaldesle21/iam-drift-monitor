@@ -8,18 +8,19 @@ DANGEROUS_ACTIONS = [
     "iam:AttachRolePolicy",
     "iam:PutRolePolicy",
     "s3:DeleteBucket",
-    "s3:DeleteObject",           # was missing
-    "s3:DeleteBucketPolicy",     # was missing
+    "s3:DeleteObject",
+    "s3:DeleteBucketPolicy",
+    "s3:*",              # ADD THIS
     "ec2:*",
     "lambda:*",
+    "cloudwatch:*",      # ADD THIS
     "sts:AssumeRole",
-    "dynamodb:DeleteTable",      # was missing
-    "cloudtrail:StopLogging",    # was missing
-    "cloudtrail:DeleteTrail",    # was missing
-    "kms:Decrypt",               # was missing
-    "secretsmanager:GetSecretValue",  # was missing
+    "dynamodb:DeleteTable",
+    "cloudtrail:StopLogging",
+    "cloudtrail:DeleteTrail",
+    "kms:Decrypt",
+    "secretsmanager:GetSecretValue",
 ]
-
 def parse_policy(policy_str):
     if isinstance(policy_str, dict):
         return policy_str

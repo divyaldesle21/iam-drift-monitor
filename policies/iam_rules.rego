@@ -131,3 +131,37 @@ violation[result] {
         "remediation": "Replace with specific EC2 actions required"
     }
 }
+# Rule 7: Wildcard service permissions (s3:*, lambda:*, cloudwatch:*)
+violation[result] {
+    stmt := input.statement
+    stmt.Effect == "Allow"
+    action := stmt.Action[_]
+    endswith(action, ":*")
+    not startswith(action, "ec2:")  # ec2:* already caught by IAM006
+    resource := stmt.Resource[_]
+    resource == "*"
+    result := {
+        "rule_id": "IAM007",
+        "severity": "HIGH",
+        "title": sprintf("Wildcard service permission '%v' grants full service access", [action]),
+        "mitre": "T1078",
+        "action": action,
+        "remediation": sprintf("Replace '%v' with specific required actions for this service", [action])
+    }
+}
+
+# Rule 8: Multiple wildcard services — CRITICAL
+violation[result] {
+    stmt := input.statement
+    stmt.Effect == "Allow"
+    wildcards := [a | a := stmt.Action[_]; endswith(a, ":*")]
+    count(wildcards) >= 3
+    result := {
+        "rule_id": "IAM008",
+        "severity": "CRITICAL",
+        "title": sprintf("Multiple wildcard service permissions (%v services) — near-admin equivalent", [count(wildcards)]),
+        "mitre": "T1078",
+        "action": concat(", ", wildcards),
+        "remediation": "Replace all wildcard permissions with specific least-privilege actions"
+    }
+}
