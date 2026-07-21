@@ -1,0 +1,29 @@
+{
+  "resource_changes": [
+    {
+      "address": "aws_iam_role_policy.bad_policy",
+      "type": "aws_iam_role_policy",
+      "change": {"actions": ["create"], "after": {"policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:PassRole\",\"s3:DeleteBucket\",\"ec2:*\"],\"Resource\":\"*\"}]}"}}
+    },
+    {
+      "address": "aws_iam_role_policy.extra_bad_policy",
+      "type": "aws_iam_role_policy",
+      "change": {"actions": ["create"], "after": {"policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"*\"],\"Resource\":\"*\"}]}"}}
+    },
+    {
+      "address": "aws_iam_role_policy.escalation_policy",
+      "type": "aws_iam_role_policy",
+      "change": {"actions": ["create"], "after": {"policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:CreateRole\",\"iam:AttachRolePolicy\",\"iam:CreatePolicyVersion\",\"iam:SetDefaultPolicyVersion\",\"lambda:CreateFunction\",\"lambda:InvokeFunction\"],\"Resource\":\"*\"}]}"}}
+    },
+    {
+      "address": "aws_iam_role_policy.credential_and_evasion_policy",
+      "type": "aws_iam_role_policy",
+      "change": {"actions": ["create"], "after": {"policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"secretsmanager:GetSecretValue\",\"kms:Decrypt\",\"cloudtrail:StopLogging\",\"cloudtrail:DeleteTrail\",\"ssm:GetParameter\"],\"Resource\":\"*\"}]}"}}
+    },
+    {
+      "address": "aws_iam_role_policy.safe_policy",
+      "type": "aws_iam_role_policy",
+      "change": {"actions": ["create"], "after": {"policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"s3:GetObject\",\"s3:ListBucket\"],\"Resource\":\"arn:aws:s3:::my-deploy-bucket/*\"}]}"}}
+    }
+  ]
+}
