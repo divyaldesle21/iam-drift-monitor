@@ -2,8 +2,9 @@ import json
 import subprocess
 import os
 import sys
+import tempfile
 
-POLICY_PATH = "/app/policies/iam_rules.rego"
+POLICY_PATH = os.path.join(os.path.dirname(__file__), "..", "policies", "iam_rules.rego")
 
 def normalize_statement(stmt):
     actions = stmt.get("Action", [])
@@ -20,14 +21,16 @@ def normalize_statement(stmt):
 
 def run_opa_on_statement(stmt):
     input_data = {"statement": normalize_statement(stmt)}
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+        json.dump(input_data, f)
+        input_path = f.name
     try:
         result = subprocess.run(
             ["opa", "eval",
-             "--input", "/dev/stdin",
+             "--input", input_path,
              "--data", POLICY_PATH,
              "--format", "json",
              "data.iam.drift.violation"],
-            input=json.dumps(input_data).encode(),
             capture_output=True,
             timeout=10
         )
@@ -39,6 +42,8 @@ def run_opa_on_statement(stmt):
     except Exception as e:
         print(f"OPA eval error: {e}")
         return []
+    finally:
+        os.unlink(input_path)
 
 def analyze_opa(plan_path):
     with open(plan_path) as f:
