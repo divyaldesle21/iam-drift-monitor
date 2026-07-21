@@ -1,10 +1,9 @@
-@"
-*.tfstate
-*.tfstate.backup
-.terraform/
+.env
+astronomer/
+charts-clickhouse/
+terraform-aws-iam/
+terragoat/
 __pycache__/
 *.pyc
-.env
 plan.bin
-plan.json
-"@ | Set-Content .gitignore
+*.sarif

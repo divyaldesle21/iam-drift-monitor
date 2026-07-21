@@ -1,0 +1,1043 @@
+{
+  "safe": [
+    {
+      "actions": [
+        "s3:ListAllMyBuckets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/examples/iam-policy/main.tf"
+    },
+    {
+      "actions": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/examples/iam-role/main.tf"
+    },
+    {
+      "actions": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/examples/iam-user/main.tf"
+    },
+    {
+      "actions": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/examples/iam-user/main.tf"
+    },
+    {
+      "actions": [
+        "iam:GetAccountSummary",
+        "iam:GetAccountPasswordPolicy",
+        "iam:ListAccountAliases",
+        "iam:ListVirtualMFADevices"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:ChangePassword",
+        "iam:GetLoginProfile",
+        "iam:GetUser",
+        "iam:UpdateLoginProfile"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:DeleteSigningCertificate",
+        "iam:ListSigningCertificates",
+        "iam:UpdateSigningCertificate",
+        "iam:UploadSigningCertificate"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:DeleteSSHPublicKey",
+        "iam:GetSSHPublicKey",
+        "iam:ListSSHPublicKeys",
+        "iam:UpdateSSHPublicKey",
+        "iam:UploadSSHPublicKey"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateServiceSpecificCredential",
+        "iam:DeleteServiceSpecificCredential",
+        "iam:ListServiceSpecificCredentials",
+        "iam:ResetServiceSpecificCredential",
+        "iam:UpdateServiceSpecificCredential"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateVirtualMFADevice"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:DeactivateMFADevice",
+        "iam:EnableMFADevice",
+        "iam:ListMFADevices",
+        "iam:ResyncMFADevice"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateVirtualMFADevice",
+        "iam:EnableMFADevice",
+        "iam:GetUser",
+        "iam:GetMFADevice",
+        "iam:ListMFADevices",
+        "iam:ListVirtualMFADevices",
+        "iam:ResyncMFADevice",
+        "sts:GetSessionToken",
+        "iam:ChangePassword"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-group/main.tf"
+    },
+    {
+      "actions": [
+        "sts:GetAccessKeyInfo",
+        "sts:GetCallerIdentity",
+        "sts:GetSessionToken"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-read-only-policy/main.tf"
+    },
+    {
+      "actions": [
+        "logs:StartQuery",
+        "logs:StopQuery",
+        "logs:FilterLogEvents"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-read-only-policy/main.tf"
+    },
+    {
+      "actions": [
+        "sts:TagSession",
+        "sts:AssumeRoleWithWebIdentity"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role/main.tf"
+    },
+    {
+      "actions": [
+        "sts:TagSession",
+        "sts:AssumeRoleWithWebIdentity"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role/main.tf"
+    },
+    {
+      "actions": [
+        "sts:TagSession",
+        "sts:AssumeRoleWithWebIdentity"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role/main.tf"
+    },
+    {
+      "actions": [
+        "sts:AssumeRoleWithWebIdentity"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/main.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateServiceLinkedRole"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateServiceLinkedRole"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "route53:GetChange"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListResourceRecordSets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "route53:ListHostedZonesByName"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeLaunchConfigurations",
+        "autoscaling:DescribeScalingActivities",
+        "autoscaling:DescribeTags",
+        "ec2:DescribeLaunchTemplateVersions",
+        "ec2:DescribeInstanceTypes",
+        "eks:DescribeNodegroup",
+        "ec2:DescribeImages",
+        "ec2:GetInstanceTypesFromInstanceRequirements"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:TerminateInstanceInAutoScalingGroup"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeInstances",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeTags",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeVolumesModifications"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateSnapshot",
+        "ec2:ModifyVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:AttachVolume",
+        "ec2:DetachVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateVolume",
+        "ec2:EnableFastSnapshotRestores"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DeleteTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DeleteVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DeleteVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DeleteVolume"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateSnapshot"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateSnapshot"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DeleteSnapshot"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DeleteSnapshot"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "kms:CreateGrant",
+        "kms:ListGrants",
+        "kms:RevokeGrant"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DescribeAvailabilityZones",
+        "elasticfilesystem:DescribeAccessPoints",
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:DescribeMountTargets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticfilesystem:CreateAccessPoint"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticfilesystem:TagResource"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticfilesystem:DeleteAccessPoint"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "s3:ListBucket"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:AbortMultipartUpload",
+        "s3:DeleteObject"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "route53:ChangeResourceRecordSets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResources"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ssm:DescribeParameters"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ssm:GetParameter",
+        "ssm:GetParameters",
+        "ssm:GetParametersByPath"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "secretsmanager:ListSecrets",
+        "secretsmanager:BatchGetSecretValue"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "secretsmanager:CreateSecret",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:TagResource"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "secretsmanager:DeleteSecret"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateServiceLinkedRole"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "s3:ListBucket",
+        "fsx:CreateFileSystem",
+        "fsx:DeleteFileSystem",
+        "fsx:DescribeFileSystems",
+        "fsx:TagResource",
+        "fsx:UpdateFileSystem"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateServiceLinkedRole"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "fsx:CreateFileSystem",
+        "fsx:UpdateFileSystem",
+        "fsx:DeleteFileSystem",
+        "fsx:DescribeFileSystems",
+        "fsx:CreateVolume",
+        "fsx:DeleteVolume",
+        "fsx:DescribeVolumes",
+        "fsx:CreateSnapshot",
+        "fsx:DeleteSnapshot",
+        "fsx:DescribeSnapshots",
+        "fsx:TagResource",
+        "fsx:ListTagsForResource"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "iam:CreateServiceLinkedRole"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeVpcPeeringConnections",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeTags",
+        "ec2:GetCoipPoolUsage",
+        "ec2:DescribeCoipPools",
+        "ec2:GetSecurityGroupsForVpc",
+        "ec2:DescribeIpamPools",
+        "ec2:DescribeRouteTables",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeListenerCertificates",
+        "elasticloadbalancing:DescribeSSLPolicies",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetGroupAttributes",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:DescribeTags",
+        "elasticloadbalancing:DescribeTrustStores",
+        "elasticloadbalancing:DescribeListenerAttributes",
+        "elasticloadbalancing:DescribeCapacityReservation"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "cognito-idp:DescribeUserPoolClient",
+        "acm:ListCertificates",
+        "acm:DescribeCertificate",
+        "iam:ListServerCertificates",
+        "iam:GetServerCertificate",
+        "waf-regional:GetWebACL",
+        "waf-regional:GetWebACLForResource",
+        "waf-regional:AssociateWebACL",
+        "waf-regional:DisassociateWebACL",
+        "wafv2:GetWebACL",
+        "wafv2:GetWebACLForResource",
+        "wafv2:AssociateWebACL",
+        "wafv2:DisassociateWebACL",
+        "shield:GetSubscriptionState",
+        "shield:DescribeProtection",
+        "shield:CreateProtection",
+        "shield:DeleteProtection"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateSecurityGroup"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DeleteSecurityGroup"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateTargetGroup"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:DeleteRule"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:ModifyListenerAttributes",
+        "elasticloadbalancing:ModifyCapacityReservation",
+        "elasticloadbalancing:ModifyIpPools"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:AddTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:DeregisterTargets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:SetWebAcl",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:AddListenerCertificates",
+        "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:ModifyRule",
+        "elasticloadbalancing:SetRulePriorities"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeInstances",
+        "ec2:DescribeVpcs",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetHealth"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:DeregisterTargets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "aps:RemoteWrite",
+        "aps:QueryMetrics",
+        "aps:GetSeries",
+        "aps:GetLabels",
+        "aps:GetMetricMetadata"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "autoscaling:CompleteLifecycleAction",
+        "autoscaling:DescribeAutoScalingInstances",
+        "autoscaling:DescribeTags",
+        "ec2:DescribeInstances"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "sqs:DeleteMessage",
+        "sqs:ReceiveMessage"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:DescribeVolumes",
+        "ec2:DescribeSnapshots",
+        "ec2:CreateTags",
+        "ec2:CreateVolume",
+        "ec2:CreateSnapshot",
+        "ec2:DeleteSnapshot"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "s3:GetObject",
+        "s3:DeleteObject",
+        "s3:PutObject",
+        "s3:PutObjectTagging",
+        "s3:AbortMultipartUpload",
+        "s3:ListMultipartUploadParts"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "s3:ListBucket"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:AssignPrivateIpAddresses",
+        "ec2:AttachNetworkInterface",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:UnassignPrivateIpAddresses"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:AssignIpv6Addresses",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "logs:DescribeLogGroups",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    },
+    {
+      "actions": [
+        "ec2:CreateTags"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terraform-aws-iam/modules/iam-role-for-service-accounts/policies.tf"
+    }
+  ],
+  "dangerous": [
+    {
+      "actions": [
+        "s3:*",
+        "ec2:*",
+        "rds:*"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terragoat/terraform/aws/db-app.tf"
+    },
+    {
+      "actions": [
+        "sts:AssumeRole"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terragoat/terraform/aws/eks.tf"
+    },
+    {
+      "actions": [
+        "es:*"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terragoat/terraform/aws/es.tf"
+    },
+    {
+      "actions": [
+        "ec2:*",
+        "s3:*",
+        "lambda:*",
+        "cloudwatch:*"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terragoat/terraform/aws/iam.tf"
+    },
+    {
+      "actions": [
+        "*"
+      ],
+      "resources": [
+        "*"
+      ],
+      "source_file": "/app/terragoat/terraform/azure/roles.tf"
+    }
+  ],
+  "stats": {
+    "safe_count": 86,
+    "dangerous_count": 5,
+    "total": 91,
+    "safe_repo": "/app/terraform-aws-iam",
+    "dangerous_repo": "/app/terragoat"
+  }
+}
