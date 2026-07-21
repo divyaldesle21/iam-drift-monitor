@@ -7,4 +7,4 @@ __pycache__/
 .env
 plan.bin
 plan.json
-"@ | Set-Content .gitignore
+"@ | Set-Content .gitignore.env

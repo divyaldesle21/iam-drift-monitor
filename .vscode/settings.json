@@ -1,0 +1,4 @@
+﻿{
+  "python.analysis.ignore": ["scripts/graph_engine.py"],
+  "python.linting.enabled": false
+}

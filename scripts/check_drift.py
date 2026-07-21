@@ -8,18 +8,19 @@ DANGEROUS_ACTIONS = [
     "iam:AttachRolePolicy",
     "iam:PutRolePolicy",
     "s3:DeleteBucket",
-    "s3:DeleteObject",           # was missing
-    "s3:DeleteBucketPolicy",     # was missing
+    "s3:DeleteObject",
+    "s3:DeleteBucketPolicy",
+    "s3:*",              # ADD THIS
     "ec2:*",
     "lambda:*",
+    "cloudwatch:*",      # ADD THIS
     "sts:AssumeRole",
-    "dynamodb:DeleteTable",      # was missing
-    "cloudtrail:StopLogging",    # was missing
-    "cloudtrail:DeleteTrail",    # was missing
-    "kms:Decrypt",               # was missing
-    "secretsmanager:GetSecretValue",  # was missing
+    "dynamodb:DeleteTable",
+    "cloudtrail:StopLogging",
+    "cloudtrail:DeleteTrail",
+    "kms:Decrypt",
+    "secretsmanager:GetSecretValue",
 ]
-
 def parse_policy(policy_str):
     if isinstance(policy_str, dict):
         return policy_str
@@ -115,18 +116,18 @@ def main():
     print(f"Scanning {plan_path}...\n")
     findings = scan_plan(plan_path)
 
-    if not findings:
-        print("✓ No IAM privilege drift detected.")
-        sys.exit(0)
-
-    print(f"Found {len(findings)} finding(s):\n")
     blocked = False
-    for f in findings:
-        icon = "🚨" if f["severity"] == "HIGH" else "⚠️"
-        print(f"{icon} [{f['severity']}] {f['resource']}")
-        print(f"   → {f['reason']}\n")
-        if f["severity"] == "HIGH":
-            blocked = True
+    if not findings:
+        print("✓ No per-statement IAM privilege drift detected.\n")
+    else:
+        print(f"Found {len(findings)} finding(s):\n")
+        for f in findings:
+            icon = "🚨" if f["severity"] == "HIGH" else "⚠️"
+            print(f"{icon} [{f['severity']}] {f['resource']}")
+            print(f"   → {f['reason']}\n")
+            if f["severity"] == "HIGH":
+                blocked = True
+
 # Graph-based attack path analysis
     try:
         from graph_engine import analyze_graph, print_graph_report

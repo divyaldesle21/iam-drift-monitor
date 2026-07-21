@@ -3,15 +3,18 @@ import networkx as nx
 
 # Known privilege escalation chains based on MITRE ATT&CK T1548
 ESCALATION_CHAINS = [
-    ["iam:CreateRole", "iam:AttachRolePolicy"],
-    ["iam:CreateRole", "iam:PutRolePolicy"],
-    ["iam:PassRole", "iam:CreateInstanceProfile"],
-    ["iam:PassRole", "ec2:RunInstances"],
-    ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion"],
-    ["iam:AttachUserPolicy", "iam:CreateAccessKey"],
-    ["sts:AssumeRole", "iam:AttachRolePolicy"],
+    # existing chains...
     ["lambda:CreateFunction", "iam:PassRole"],
     ["lambda:InvokeFunction", "lambda:CreateFunction"],
+    ["iam:CreateRole", "iam:AttachRolePolicy"],
+    ["iam:CreatePolicyVersion", "iam:SetDefaultPolicyVersion"],
+    ["sts:AssumeRole", "iam:AttachRolePolicy"],
+    # ADD THESE for wildcard service detection
+    ["lambda:*", "iam:PassRole"],        # lambda:* includes CreateFunction
+    ["ec2:*", "iam:PassRole"],           # ec2:* includes RunInstances
+    ["s3:*", "cloudtrail:StopLogging"],  # s3:* can exfiltrate then cover tracks
+    ["lambda:*", "ec2:*"],              # serverless to compute pivot
+    ["cloudwatch:*", "s3:*"],           # delete monitoring then exfiltrate
 ]
 
 SENSITIVE_SERVICES = {
