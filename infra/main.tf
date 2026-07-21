@@ -1,3 +1,4 @@
+```hcl
 terraform {
   required_providers {
     aws = {
@@ -12,13 +13,13 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "ci_role" {
-  name = "ci-deploy-role"
+  name               = "ci-deploy-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect    = "Allow"
+      Effect  = "Allow"
       Principal = { Service = "ec2.amazonaws.com" }
-      Action    = "sts:AssumeRole"
+      Action  = "sts:AssumeRole"
     }]
   })
 }
@@ -30,9 +31,32 @@ resource "aws_iam_role_policy" "bad_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = ["iam:PassRole", "s3:DeleteBucket", "ec2:*"]
-        Resource = "*"
+        Effect = "Allow"
+        Action = [
+          "iam:PassRole"
+        ]
+        Resource = "arn:aws:iam::*:role/ci-deploy-role"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:DeleteBucket"
+        ]
+        Resource = "arn:aws:s3:::ci-deployment-bucket"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ec2:DescribeInstances",
+          "ec2:DescribeTags",
+          "ec2:DescribeSecurityGroups",
+          "ec2:RunInstances",
+          "ec2:TerminateInstances"
+        ]
+        Resource = [
+          "arn:aws:ec2:*:*:instance/*",
+          "arn:aws:ec2:*:*:security-group/*"
+        ]
       }
     ]
   })
@@ -45,13 +69,61 @@ resource "aws_iam_role_policy" "extra_bad_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = ["*"]
-        Resource = "*"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:ListBucket"
+        ]
+        Resource = [
+          "arn:aws:s3:::ci-deployment-bucket",
+          "arn:aws:s3:::ci-deployment-bucket/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "arn:aws:logs:*:*:log-group:/aws/lambda/ci-deploy*"
       }
     ]
   })
 }
-# sarif on main trigger
-# sarif on main trigger
-# sarif on main trigger
+
+resource "aws_iam_role_policy" "escalation_policy" {
+  name = "controlled-iam-permissions"
+  role = aws_iam_role.ci_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "iam:ListPolicies",
+          "iam:GetRole",
+          "iam:GetPolicy"
+        ]
+        Resource = [
+          "arn:aws:iam::*:role/ci-deploy-role",
+          "arn:aws:iam::*:policy/ci-*"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "credential_and_evasion_policy" {
+  name = "controlled-secrets-access"
+  role = aws_iam_role.ci_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
+        
