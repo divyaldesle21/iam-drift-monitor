@@ -1,73 +1,75 @@
 # Containerized CI/CD IAM Privilege-Drift Monitor
 
-An automated security gate that scans Infrastructure-as-Code pull requests for over-privileged IAM changes, blocks deployments, and alerts via Discord/Slack.
+A multi-layer security gate that scans every Terraform pull request for over-privileged IAM changes, blocks dangerous merges, simulates attacker impact, and autonomously generates fixes.
 
 ## What It Does
 
-Every time a pull request modifies a Terraform IAM policy, this tool:
-1. Builds a Docker container with Checkov + custom Python scanner
-2. Parses the Terraform plan JSON for dangerous IAM patterns
-3. Fails the build and blocks the merge if HIGH severity findings are detected
-4. Fires a real-time Discord/Slack alert with the exact resource and reason
+Every pull request that modifies a Terraform IAM policy triggers an 11-layer detection pipeline running inside Docker:
 
-## Risk Patterns Detected
+1. Rule-based engine - 15 dangerous IAM action patterns
+2. Graph attack paths - multi-hop escalation chains (NetworkX + MITRE ATT&CK)
+3. OPA/Rego policy engine - 6 declarative rules with MITRE mappings
+4. ML anomaly detection - supervised Random Forest (F1=0.929)
+5. Blast radius simulator - quantifies attacker impact 0-100
+6. AI Red Team Agent - Claude AI autonomously plans attack chains
+7. Policy DNA engine - Smith-Waterman genome alignment vs known attacks
+8. Self-healing auto-PR bot - generates least-privilege fix automatically
+9. Temporal drift analysis - mines git history for slow-burn creep
+10. Honeypot permission layer - canary-based deception detection
+11. SARIF integration - GitHub Security tab native reporting
 
-| Pattern | Severity |
-|---|---|
-| `iam:PassRole` with wildcard resource | HIGH |
-| Wildcard `Action: "*"` | HIGH |
-| `s3:DeleteBucket` with wildcard resource | HIGH |
-| `ec2:*` with wildcard resource | HIGH |
-| Wildcard `Resource: "*"` alone | MEDIUM |
+## Evaluation Results
 
-## Project Structure
+| Layer | Precision | Recall | F1 |
+|---|---|---|---|
+| Rule-based | 1.000 | 1.000 | 1.000 |
+| OPA/Rego | 1.000 | 0.733 | 0.846 |
+| ML Random Forest | 1.000 | 0.867 | 0.929 |
+| Combined System | 1.000 | 1.000 | 1.000 |
 
-## Setup
+Evaluated against 30-case labeled corpus AND TerraGoat real-world vulnerabilities.
+TerraGoat blast radius: 100/100 CATASTROPHIC - 5 active attack chains detected.
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/divyaldesle21/iam-drift-monitor.git
-cd iam-drift-monitor
-```
+## Real-World Evaluation - TerraGoat
 
-### 2. Add GitHub Secrets
-Go to repo Settings → Secrets and variables → Actions:
+Tested against TerraGoat (Bridgecrew deliberately vulnerable infrastructure):
+- 4 HIGH rule violations detected
+- 5 OPA policy violations (1 CRITICAL IAM008 - T1078)
+- 2 graph escalation paths
+- Blast radius: 100/100 CATASTROPHIC
+- Attack chains: Full Data Exfiltration (T1530), Compute Takeover (T1578), Monitoring Blind Spot (T1562)
 
-| Secret | Value |
-|---|---|
-| `DISCORD_WEBHOOK` | Your Discord webhook URL |
-| `AWS_ACCESS_KEY_ID` | AWS IAM user access key |
-| `AWS_SECRET_ACCESS_KEY` | AWS IAM user secret key |
+## Quick Start
 
-### 3. Enable branch protection
-Settings → Branches → Add rule → require `IAM Privilege Drift Scan` to pass
-
-### 4. Test locally
-```bash
 docker build -t iam-drift-monitor .
-docker run --rm -v "${PWD}:/app" iam-drift-monitor /app/plan.json
-```
+docker run --rm -v PWD:/app iam-drift-monitor /app/plan.json
 
-### 5. Run tests
-```bash
-docker run --rm -v "${PWD}:/app" --entrypoint pytest iam-drift-monitor /app/tests/test_drift.py -v
-```
+## All Commands
 
-## How It Works
+Full scan:      docker run --rm -v PWD:/app iam-drift-monitor /app/plan.json
+Blast radius:   docker run --rm -v PWD:/app --entrypoint python iam-drift-monitor /app/scripts/blast_radius.py /app/plan.json
+AI Red Team:    docker run --rm -v PWD:/app --env-file .env --entrypoint python iam-drift-monitor /app/scripts/ai_red_team.py /app/plan.json
+Policy DNA:     docker run --rm -v PWD:/app --entrypoint python iam-drift-monitor /app/scripts/policy_dna.py /app/plan.json
+Temporal drift: docker run --rm -v PWD:/app --entrypoint python iam-drift-monitor /app/scripts/temporal_analyzer.py /app infra/main.tf
+Honeypot:       docker run --rm -v PWD:/app --entrypoint python iam-drift-monitor /app/scripts/honeypot.py /app/plan.json
+Tests:          docker run --rm -v PWD:/app --entrypoint pytest iam-drift-monitor /app/tests/test_drift.py -v
+Evaluation:     docker run --rm -v PWD:/app --entrypoint python iam-drift-monitor /app/scripts/evaluator.py
 
-## Demo
+## MITRE ATT&CK Coverage
 
-Open a PR with a vulnerable IAM policy:
-- Build fails with `BUILD BLOCKED — HIGH severity findings detected`
-- Merge button is blocked by branch protection
-- Discord alert fires with resource name and violation reason
-
-Fix the policy to least-privilege → build passes → merge allowed.
+T1548 - Privilege Escalation     - Rules, OPA, Graph
+T1485 - Data Destruction         - Rules, OPA
+T1552 - Credential Access        - Rules, OPA, Honeypot
+T1562 - Defense Evasion          - Rules, OPA, Honeypot
+T1578 - Compute Modification     - Rules, OPA, Blast Radius
+T1078 - Valid Accounts           - OPA, DNA
+T1648 - Serverless Execution     - Graph, Blast Radius
+T1530 - Data from Cloud Storage  - Blast Radius
 
 ## Tech Stack
 
-GitHub Actions · Docker · Python 3.12 · Checkov · TFLint · Terraform · AWS IAM · Discord Webhooks · pytest
+Docker, Python 3.12, Checkov, TFLint, OPA/Rego, NetworkX, scikit-learn, BioPython, GitHub Actions, SARIF, Discord Webhooks, Claude AI
 
 ## Author
 
-Divyal Desle — M.S. Cybersecurity, University of Denver
+Divyal Desle - M.S. Cybersecurity, University of Denver, 2026
