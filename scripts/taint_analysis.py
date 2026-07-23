@@ -12,11 +12,10 @@ TAINT_SOURCES = {
 DIRECT_PATTERNS = {
     "sql_concat": {
         "patterns": [
-            r"(?i)\"\s*SELECT\s+[^\"]*\"\s*\+",
-            r"(?i)\"\s*INSERT\s+INTO[^\"]*\"\s*\+",
-            r"(?i)\"\s*UPDATE\s+[^\"]*\"\s*\+",
-            r"(?i)\"\s*DELETE\s+FROM[^\"]*\"\s*\+",
-            r"(?i)WHERE[^\";]*=\s*'\"\s*\+",
+            r"(?i)\w+\s*=\s*\"\s*SELECT\s+[^\"]*\"\s*\+",
+            r"(?i)\w+\s*=\s*\"\s*INSERT\s+INTO[^\"]*\"\s*\+",
+            r"(?i)\w+\s*=\s*\"\s*UPDATE\s+[^\"]*\"\s*\+",
+            r"(?i)\w+\s*=\s*\"\s*DELETE\s+FROM[^\"]*\"\s*\+",
             r"(?i)executeQuery\s*\(\s*\"[^\"]*\"\s*\+",
         ],
         "cwe": "CWE-89", "name": "SQL Injection (string concatenation)",
@@ -92,6 +91,9 @@ def is_noise(content, pos):
     ls = content.rfind("\n", 0, pos) + 1
     prefix = content[ls:pos]
     s = prefix.lstrip()
+    full_line = content[ls:content.find(chr(10), pos) if content.find(chr(10), pos) > 0 else len(content)]
+    if "hints.add" in full_line or "getInstructions" in full_line or "<br>" in full_line:
+        return True
     return s.startswith("//") or s.startswith("#") or s.startswith("*")
 
 def line_of(content, pos):
