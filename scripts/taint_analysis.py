@@ -42,6 +42,29 @@ DIRECT_PATTERNS = {
         "impact": "Live AWS credentials exposed in source control",
         "why": "AWS Access Key ID literal found in source"
     },
+    "hardcoded_creds": {
+        "patterns": [
+            r"(?i)(password|passwd|pwd|secret|api_?key)\s*=\s*\"(?![A-Z][a-z]+\"|CSRFToken)[^\"]{6,}\"",
+            r"(?i)setPassword\s*\(\s*\"[^\"]{6,}\"",
+            r"(?i)setPassword\s*\(\s*\"[^\"]{3,}\"",
+            r"(?i)DriverManager\.getConnection\s*\([^)]*\"[^\"]*\"\s*,\s*\"[^\"]+\"\s*,\s*\"[^\"]+\"",
+        ],
+        "cwe": "CWE-798", "name": "Hardcoded Credentials",
+        "severity": "CRITICAL", "owasp": "A07:2021 Auth Failures",
+        "impact": "Credentials in source enable direct authentication and lateral movement",
+        "why": "Password or secret literal embedded in source code"
+    },
+    "session_weakness": {
+        "patterns": [
+            r"(?i)new\s+Cookie\s*\([^)]*\)(?![^;]*setSecure)",
+            r"(?i)setMaxAge\s*\(\s*-?[0-9]{6,}\s*\)",
+            r"(?i)JSESSIONID",
+        ],
+        "cwe": "CWE-384", "name": "Session Fixation / Weak Session Handling",
+        "severity": "HIGH", "owasp": "A07:2021 Auth Failures",
+        "impact": "Session token can be fixed, stolen, or replayed to hijack accounts",
+        "why": "Session cookie created without secure attributes"
+    },
     "weak_crypto": {
         "patterns": [r"MessageDigest\.getInstance\s*\(\s*\"(MD5|SHA-?1)\"", r"hashlib\.(md5|sha1)\s*\("],
         "cwe": "CWE-327", "name": "Weak Cryptographic Hash",
